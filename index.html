@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공학용 전자계산기 - 오자영이 만든 계산기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+            margin: 0 auto;
+        }
+        button {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            background-color: #f0f0f0;
+        }
+        button:hover {
+            background-color: #e0e0e0;
+        }
+        #result {
+            grid-column: span 4;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        #history {
+            text-align: left;
+            margin-top: 20px;
+        }
+        #operators {
+            grid-column: span 4;
+            margin-top: 10px;
+        }
+        #operators button {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <h1>공학용 전자계산기</h1>
+    <h2>오자영이 만든 계산기</h2>
+    <div class="calculator">
+        <div id="result"></div>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="appendToDisplay('(')">(</button>
+        <button onclick="appendToDisplay(')')">)</button>
+        <button onclick="appendToDisplay('/')">/</button>
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button onclick="appendToDisplay('*')">x</button>
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button onclick="appendToDisplay('-')">-</button>
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button onclick="appendToDisplay('+')">+</button>
+        <button onclick="appendToDisplay('Math.sqrt(')">√</button>
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button onclick="calculate()">=</button>
+    </div>
+
+    <div id="history"></div>
+
+    <div id="operators">
+        <button onclick="appendToDisplay('Math.sin(')">sin</button>
+        <button onclick="appendToDisplay('Math.cos(')">cos</button>
+        <button onclick="appendToDisplay('Math.tan(')">tan</button>
+        <button onclick="appendToDisplay('Math.PI')">π</button>
+        <button onclick="appendToDisplay('^')">^</button>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('result').textContent += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('result').textContent = '';
+        }
+
+        function calculate() {
+            var result = document.getElementById('result').textContent;
+            try {
+                var output = eval(result);
+                document.getElementById('result').textContent = output;
+                document.getElementById('history').innerHTML += result + ' = ' + output + '<br>';
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
